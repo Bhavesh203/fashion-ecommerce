@@ -15,19 +15,19 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 
-// Serve static files from frontend
+const path = require('path');
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-// React fallback
-app.get('*', (req, res) => {
+app.get('', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
 });
 
 
+
 // ✅ Use env variable
 mongoose.connect(process.env.MONGO_URI, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true
+  //   useNewUrlParser: true,
+  //   useUnifiedTopology: true
 }).then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
